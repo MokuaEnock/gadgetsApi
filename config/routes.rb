@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   get "/sessions", to: "sessions#index"
+  post "/login", to: "sessions#login"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
