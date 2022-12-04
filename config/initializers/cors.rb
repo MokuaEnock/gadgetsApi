@@ -5,12 +5,19 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
+# Rails.application.config.middleware.insert_before 0, Rack::Cors do
+#   allow do
+#     # origins "example.com"
+
+#     resource "http://localhost:8000/",
+#       headers: :any,
+#       methods: [:get, :post, :put, :patch, :delete, :options, :head]
+#   end
+# end
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # origins "example.com"
-
-    resource "http://localhost:8000/",
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+    origins "http://localhost:8000"
+    resource "*", headers: :any, methods: %i[get post patch put]
   end
 end
