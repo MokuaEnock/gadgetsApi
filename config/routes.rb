@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/sessions", to: "sessions#index"
   post "/login", to: "sessions#login"
   get "/me", to: "User#show"
+  get "logout", to: "session#destroy"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
