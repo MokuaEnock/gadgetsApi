@@ -11,6 +11,12 @@ class ProductsController < ApplicationController
     render json: product
   end
 
+  # def reviews_index
+  #   product = Product.find(params[:id])
+  #   reviews = product.reviews
+  #   render json: reviews, include: :product
+  # end
+
   private
 
   def render_not_found_response
