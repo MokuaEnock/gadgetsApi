@@ -4,8 +4,13 @@ class ReviewsController < ApplicationController
               with: :render_unprocessable_entity_response
 
   def index
-    reviews = Review.all
-    render json: reviews
+    if params[:product_id]
+      product = Product.find(params[:product_id])
+      reviews = product.reviews
+    else
+      reviews = Review.all
+    end
+    render json: reviews, include: :product
   end
 
   def show
