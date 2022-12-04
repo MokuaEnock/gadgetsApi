@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :reviews, only: %i[show index]
   end
 
-  # get "/cookie_click", to: "sessions/click"
+  get "/sessions", to: "sessions#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

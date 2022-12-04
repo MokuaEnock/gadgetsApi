@@ -1,9 +1,7 @@
 class SessionsController < ApplicationController
-
-  def click
-    cookies[:click] ||= 0
-    cookies[:click] += cookies[:click].to_i
-    cookies[:click] ||= 0
-    session[:click] += 1
+  def index
+    session[:session_hello] ||= "World"
+    cookies[:cookies_hello] ||= "World"
+    render json: { session: session, cookies: cookies.to_hash }
   end
 end
