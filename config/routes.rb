@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :reviews
-  resources :users
   resources :products
 
   resources :products, only: [:show] do
@@ -9,6 +8,7 @@ Rails.application.routes.draw do
 
   get "/sessions", to: "sessions#index"
   post "/login", to: "sessions#login"
+  get "/me", to: "User#show"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
