@@ -14,6 +14,6 @@ class ReviewsController < ApplicationController
   private
 
   def render_not_found_response
-    render json: { error: "Author not found" }, status: :not_found
+    render json: { error: "Review not found" }, status: :not_found
   end
 end
