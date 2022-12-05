@@ -1,7 +1,4 @@
 class ReviewsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
-  rescue_from ActiveRecord::RecordInvalid,
-              with: :render_unprocessable_entity_response
 
   def index
     if params[:product_id]
@@ -19,7 +16,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    review = Review.create!(review_params)
+    review = @current_user.reviews.create!(review_params)
     render json: review
   end
 
@@ -35,18 +32,7 @@ class ReviewsController < ApplicationController
 
   private
 
-  def render_not_found_response
-    render json: { error: "Review not found" }, status: :not_found
-  end
-
   def review_params
     params.permit(:message, :rating, :user_id, :product_id)
-  end
-
-  def render_unprocessable_entity_response(invalid)
-    render json: {
-             error: invalid.record.errors.full_messages
-           },
-           status: :unprocessable_entity
   end
 end
