@@ -1,14 +1,17 @@
 class SessionsController < ApplicationController
-  def index
-    session[:session_hello] ||= "Mokua"
-    cookies[:cookies_hello] ||= "Mokua"
-    render json: { session: session, cookies: cookies.to_hash }
-  end
+  skip_before_action :authorize, only: :create
 
   def create
     user = User.find_by(email: params[:email])
-    session[user_id] = user.id
-    render json: user
+    if user&.authenticate(params[:password])
+      session[:user_id] = user.id
+      render json: user
+    else
+      render json: {
+               errors: ["Invalid username or password"]
+             },
+             status: :unauthorized
+    end
   end
 
   def destroy
